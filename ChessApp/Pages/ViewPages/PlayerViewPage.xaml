@@ -1,0 +1,77 @@
+﻿<Page x:Class="ChessApp.Pages.ViewPages.PlayerViewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:elements="clr-namespace:ChessApp.CustomControls"
+      xmlns:local="clr-namespace:ChessApp.Pages.ViewPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Список игроков">
+
+    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Style="{StaticResource StackPanelMenuViewPage}">
+                <Button Style="{StaticResource TrueIconButtonAdd}" Margin="0 0 5 0" Click="AddBtnClick"/>
+                <elements:SearchBox x:Name="tbSearch" Width="300" KeyDown="KeyDownSearchBox" KeyUp="KeyDownSearchBox" />
+            </StackPanel>
+
+            <ListView HorizontalAlignment="Center" ItemContainerStyle="{StaticResource ListViewItemWithoutSelection}" Margin="5" SelectionMode="Single" 
+                      BorderThickness="0" Background="Transparent" x:Name="viewList" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="240" Height="240" Background="{StaticResource PrimaryBackgroundColor}" CornerRadius="15">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Rectangle SnapsToDevicePixels="True" RadiusX="15" RadiusY="15" Margin="5">
+                                    <Rectangle.Fill>
+                                        <ImageBrush Stretch="UniformToFill" ImageSource="{Binding Image, TargetNullValue={StaticResource defaultImage}}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontSize="12" Margin="10 0 0 3" FontFamily="{StaticResource LableMontserratFont}">
+                                            <Run Text="{Binding FirstName}"/>
+                                            <Run Text="{Binding LastName}"/>
+                                        </TextBlock>
+                                        <TextBlock Foreground="{StaticResource TBoxSelectionBrush}" FontFamily="{StaticResource CustomTextFont}"  TextWrapping="Wrap" Margin="10 0 0 0">
+                                            <Run Text="{Binding Rating}" Foreground="{StaticResource PrimaryBlueColor}"/>
+                                            <Run Text="🌟"/>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding SportRank.Name}" Margin="10 0 0 0" Foreground="{StaticResource PrimaryGrayColor}"/>
+                                    </StackPanel>
+                                    <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Content="✒️" ToolTip="Редактировать" Style="{StaticResource AuthButtonAlterStyle}" FontSize="10" FontFamily="{StaticResource LableMontserratFont}" Margin="2" Click="EditBtnClick"/>
+                                        <Button Content="❌" ToolTip="Удалить" Style="{StaticResource AuthButton}" FontSize="10" FontFamily="{StaticResource LableMontserratFont}" Grid.Column="1" Margin="2" Click="DeleteBtnClick"/>
+                                    </Grid>
+                                   
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Border>
+</Page>

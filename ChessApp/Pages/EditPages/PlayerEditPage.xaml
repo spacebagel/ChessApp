@@ -1,0 +1,61 @@
+﻿<Page x:Class="ChessApp.Pages.EditPages.PlayerEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:elements="clr-namespace:ChessApp.CustomControls"
+      xmlns:local="clr-namespace:ChessApp.Pages.EditPages"
+      xmlns:methods="clr-namespace:ChessApp.Methods"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="Player Edit" x:Name="ePlayerPage">
+    <Page.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource AuthButton}"></Style>
+        <methods:DateOnlyToNullableDateTimeConverter x:Key="DateOnlyToNullableDateTimeConverter"/>
+    </Page.Resources>
+    <Border Style="{StaticResource EditPageBackground}">
+        <StackPanel Style="{StaticResource CenterEditPanel}">
+            <Label Content="Участник" Style="{StaticResource PageMainLabel}"/>
+            <elements:CuteTextBox x:Name="tbFirstName" Title="Имя" cText="{Binding ElementName=ePlayerPage, Path=EditPlayer.FirstName}"/>
+            <elements:CuteTextBox x:Name="tbLastName" Title="Фамилия" cText="{Binding ElementName=ePlayerPage, Path=EditPlayer.LastName}"/>
+            <StackPanel Style="{StaticResource EditDateStackPanel}">
+                <Label Style="{StaticResource EditDateLabel}" Content="Дата рождения: "/>
+                <DatePicker Style="{StaticResource EditDatePicker}" x:Name="dpBirthdate" SelectedDate="{Binding ElementName=ePlayerPage, Path=EditPlayer.Birthdate, Converter={StaticResource DateOnlyToNullableDateTimeConverter}}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ComboBoxPanel}">
+            <StackPanel Style="{StaticResource ComboBoxSubPanel}">
+                <Label Style="{StaticResource ComboBoxHeaderLabel}" Content="Спортивный разряд"/>
+                <ComboBox x:Name="cbSportRank" Style="{StaticResource ComboboxStyle}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
+            </StackPanel>
+                <Button Style="{StaticResource ComboBoxAddButton}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ComboBoxPanel}">
+                <StackPanel Style="{StaticResource ComboBoxSubPanel}">
+                <Label Style="{StaticResource ComboBoxHeaderLabel}" Content="Звание чемпиона"/>
+                <ComboBox x:Name="cbIsWorldChampion" Style="{StaticResource ComboboxStyle}" SelectedValuePath="Id" DisplayMemberPath="Name">
+
+                </ComboBox>
+            </StackPanel>
+                <Button Style="{StaticResource ComboBoxAddButton}"/>
+            </StackPanel>
+            <elements:CuteTextBox x:Name="tbRating" Title="Рейтинг" cText="{Binding ElementName=ePlayerPage, Path=EditPlayer.Rating}"/>
+            <StackPanel Style="{StaticResource ComboBoxPanel}">
+                <StackPanel Style="{StaticResource ComboBoxSubPanel}">
+                <Label Style="{StaticResource ComboBoxHeaderLabel}" Content="Страна"/>
+                <ComboBox x:Name="cbCountry" Style="{StaticResource ComboboxStyle}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
+            </StackPanel>
+                <Button Style="{StaticResource ComboBoxAddButton}"/>
+            </StackPanel>
+            <elements:CuteTextBox x:Name="tbNote" Title="Заметки" cText="{Binding ElementName=ePlayerPage, Path=EditPlayer.Note}"/>
+            <Button Content="Выбрать фото" Style="{StaticResource AuthButton}" Margin="0 0 0 3" Background="{StaticResource IconButtonBackColor}" Foreground="Black" Click="GetImageBtnClick"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource ConfirmEditPageButton}" Click="AddBtnClick"/>
+                <Button Grid.Column="1" Style="{StaticResource CancelEditPageButton}" Click="ClearBtnClick"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Page>

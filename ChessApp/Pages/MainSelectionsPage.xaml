@@ -1,0 +1,31 @@
+﻿<Page x:Class="ChessApp.Pages.MainSelectionsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChessApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainSelectionsPage">
+
+    <Grid>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource AuthButton}" Content="Турнир с самым высоким рейтингом" Click="GetHighestRatedTournament"/>
+                <Button Grid.Column="1" Style="{StaticResource AuthButton}" Content="Турниры с призовыми местами для страны-хозяина" Click="GetHostCountryWinningTournaments"/>
+                <Button Grid.Row="1" Style="{StaticResource AuthButton}" Content="Шахматисты с 3+ призовыми местами в 2000 г." Click="GetPlayersWithThreeOrMorePrizesIn2000"/>
+                <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource AuthButton}" Content="Турниры с самым низким результатом участника с самым высоким рейтингом" FontSize="12" Click="GetLowestRankedHighestRatedPlayerTournaments"/>
+            </Grid>
+            
+            <TextBlock x:Name="OutputTextBlock" TextWrapping="Wrap" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Page>

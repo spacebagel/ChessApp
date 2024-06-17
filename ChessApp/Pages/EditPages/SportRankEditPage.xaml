@@ -1,0 +1,26 @@
+﻿<Page x:Class="ChessApp.Pages.EditPages.SportRankEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:elements="clr-namespace:ChessApp.CustomControls"
+      xmlns:local="clr-namespace:ChessApp.Pages.EditPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Sport Rank Edit" x:Name="eSportRankPage">
+
+    <Border Style="{StaticResource EditPageBackground}">
+        <StackPanel Style="{StaticResource CenterEditPanel}">
+            <Label Content="Спортивный разряд" Style="{StaticResource PageMainLabel}"/>
+            <elements:CuteTextBox x:Name="tbName" Title="Наименование" cText="{Binding ElementName=eSportRankPage, Path=EditSportRank.Name}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource ConfirmEditPageButton}" Click="AddBtnClick"/>
+                <Button Grid.Column="1" Style="{StaticResource CancelEditPageButton}" Click="ClearBtnClick"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Page>

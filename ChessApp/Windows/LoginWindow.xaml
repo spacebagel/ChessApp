@@ -1,0 +1,54 @@
+﻿<Window x:Class="ChessApp.Windows.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessApp.Windows"
+        xmlns:elements="clr-namespace:ChessApp.CustomControls"
+        mc:Ignorable="d"
+        Title="Добро пожаловать!" Width="350" Height="300" x:Name="loginWindow"
+        Background="Transparent" AllowsTransparency="True"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" WindowState="Normal" Icon="/Assets/Icons/chessIcon.ico">
+
+    <Border  CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}" MouseDown="Border_MouseDown">
+        <Grid>
+            <!-- Start: Button Close | Restore | Minimize -->
+            <Grid Background="Transparent"  Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" MouseDown ="Drag" Background="Transparent" Grid.Column="4"  VerticalAlignment="Top"  Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Button x:Name="btnClose" Margin="10 5 0 0" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                    <Button x:Name="btnRestore" Margin="5 5 0 0" Click="btnRestore_Click">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                                <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=loginWindow, Path=WindowState}" Value="Maximized">
+                                        <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button x:Name="btnMinimize" Margin="5 5 0 0" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+                </StackPanel>
+            </Grid>
+            <!-- End: Button Close | Restore | Minimize -->
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+                <Label Content="Авторизация" Style="{StaticResource PageMainLabel}"/>
+                <elements:CuteTextBox x:Name="loginTBox" Title="Логин"/>
+                <elements:СutePasswordBox x:Name="passwordBox" Height="35" Title="Пароль" Margin="0,0,0,3"/>
+                
+                <Button Style="{StaticResource AuthButton}" Content="Войти" Click="AuthBtn_Click" />
+                <TextBlock Margin="0 6 0 0" HorizontalAlignment="Center" FontFamily="{StaticResource CustomTextFont}">
+                    <Run Text="Забыли пароль?"/>
+                    <Run Text="Написать администратору" Cursor="Hand" Foreground="{StaticResource PrimaryBlueColor}" MouseDown="SendEmailClick"/>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

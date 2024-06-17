@@ -1,0 +1,45 @@
+﻿<Window x:Class="ChessApp.Windows.PopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessApp.Windows"
+        mc:Ignorable="d"
+        Title="Фунциональное окно" Height="550" Width="500" MinHeight="550" MinWidth="450"
+        x:Name="popupWindow" WindowStyle="None"
+        Background="Transparent" AllowsTransparency="True"
+        ResizeMode="NoResize" WindowState="Normal" Icon="/Assets/Icons/chessIcon.ico">
+    <Border  CornerRadius="5" Background="{DynamicResource PrimaryBackgroundColor}" MouseDown="Border_MouseDown" BorderBrush="{StaticResource PrimaryGrayColor}" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Start: Button Close | Restore | Minimize -->
+            <Grid Background="Transparent"  Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" MouseDown ="Drag" Background="Transparent" Grid.Column="4"  VerticalAlignment="Top"  Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <Button x:Name="btnClose" Margin="10 5 0 0" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                    <Button x:Name="btnRestore" Margin="5 5 0 0" Click="btnRestore_Click">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                                <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=popupWindow, Path=WindowState}" Value="Maximized">
+                                        <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button x:Name="btnMinimize" Margin="5 5 0 0" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+                </StackPanel>
+            </Grid>
+            <!-- End: Button Close | Restore | Minimize -->
+            <Frame x:Name="PopupPagesNavigation" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Border>
+</Window>

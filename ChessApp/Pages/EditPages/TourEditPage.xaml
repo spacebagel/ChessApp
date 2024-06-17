@@ -1,0 +1,52 @@
+﻿<Page x:Class="ChessApp.Pages.EditPages.TourEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:elements="clr-namespace:ChessApp.CustomControls"
+      xmlns:local="clr-namespace:ChessApp.Pages.EditPages"
+      xmlns:methods="clr-namespace:ChessApp.Methods"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Tour Edit" x:Name="eTourPage">
+    <Page.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource AuthButton}"></Style>
+        <methods:DateOnlyToNullableDateTimeConverter x:Key="DateOnlyToNullableDateTimeConverter"/>
+    </Page.Resources>
+    <Border Style="{StaticResource EditPageBackground}">
+        <StackPanel Style="{StaticResource CenterEditPanel}">
+            <Label Content="Турнир" Style="{StaticResource PageMainLabel}"/>
+            <!--<ComboBox x:Name="cbCity" Style="{StaticResource MainComboboxPrettyStyle}"/>-->
+            <StackPanel Style="{StaticResource ComboBoxPanel}">
+            <StackPanel Style="{StaticResource ComboBoxSubPanel}">
+                <Label Style="{StaticResource ComboBoxHeaderLabel}" Content="Город"/>
+                <ComboBox x:Name="cbCity" Style="{StaticResource ComboboxStyle}" SelectedValuePath="Id" 
+      DisplayMemberPath="Name" SelectedIndex="0"/>
+            </StackPanel>
+                <Button Style="{StaticResource ComboBoxAddButton}"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource ComboBoxPanel}">
+                <StackPanel Style="{StaticResource ComboBoxSubPanel}">
+                <Label Style="{StaticResource ComboBoxHeaderLabel}" Content="Уровень соревнования"/>
+                <ComboBox x:Name="cbTourLvl" Style="{StaticResource ComboboxStyle}" SelectedValuePath="Id" DisplayMemberPath="Name"/>
+            </StackPanel>
+                <Button Style="{StaticResource ComboBoxAddButton}"/>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource EditDateStackPanel}">
+                <Label Style="{StaticResource EditDateLabel}" Content="Дата проведения: "/>
+                <DatePicker Style="{StaticResource EditDatePicker}" x:Name="dpEventDate" SelectedDate="{Binding ElementName=eTourPage, Path=EditTour.EventDate, Converter={StaticResource DateOnlyToNullableDateTimeConverter}}"/>
+            </StackPanel>
+
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource ConfirmEditPageButton}" Click="AddBtnClick"/>
+                <Button Grid.Column="1" Style="{StaticResource CancelEditPageButton}" Click="ClearBtnClick"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Page>
